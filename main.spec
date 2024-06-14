@@ -1,11 +1,11 @@
-# -*- mode: python ; coding: utf-8 -*-
+# main.spec
 
 block_cipher = None
 
 a = Analysis(['main.py'],
-             pathex=['I:\MY_PROGRAMS\PortableBrowser\pythonProject\dist'],
+             pathex=['.'],
              binaries=[],
-             datas=[('site_data.py', '.')],  # Включаем файл site_data.py
+             datas=[('bookmarks.json', '.')],
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
@@ -20,14 +20,14 @@ pyz = PYZ(a.pure, a.zipped_data,
 
 exe = EXE(pyz,
           a.scripts,
-          a.binaries,
-          a.zipfiles,
-          a.datas,
-          name='PortableBrowser',  # Имя вашего исполняемого файла без расширения
+          [],
+          exclude_binaries=True,
+          name='main',
           debug=False,
+          bootloader_ignore_signals=False,
           strip=False,
           upx=True,
-          console=False)  # Установите True, если вы хотите консольное приложение
+          console=False)
 
 coll = COLLECT(exe,
                a.binaries,
@@ -36,5 +36,4 @@ coll = COLLECT(exe,
                strip=False,
                upx=True,
                upx_exclude=[],
-               name='PortableBrowser')  # Имя вашего итогового каталога или exe-файла
-
+               name='main')
