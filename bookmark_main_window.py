@@ -77,8 +77,8 @@ class BookmarkMainWindow(QMainWindow):
             del self.bookmarks[category][index]
             if not self.bookmarks[category]:  # Если категория пустая, удалите её
                 del self.bookmarks[category]
-            sity_list.save_bookmarks(self.bookmarks)  # Сохранить изменения в модуле sity_list
-            self.refresh_ui()  # Обновить интерфейс после удаления закладки
+            sity_list.save_bookmarks(self.bookmarks)
+            self.refresh_ui()
 
     def refresh_ui(self):
         layout = self.centralWidget().layout()
@@ -107,8 +107,8 @@ class BookmarkMainWindow(QMainWindow):
                     if category not in self.bookmarks:
                         self.bookmarks[category] = []
                     self.bookmarks[category].append({"name": site_name, "url": site_url})
-                    sity_list.save_bookmarks(self.bookmarks)  # Сохранить изменения в модуле sity_list
-                    self.refresh_ui()  # Обновить интерфейс после добавления закладки
+                    sity_list.save_bookmarks(self.bookmarks)
+                    self.refresh_ui()
 
     def filter_bookmarks(self, text):
         layout = self.centralWidget().layout()
