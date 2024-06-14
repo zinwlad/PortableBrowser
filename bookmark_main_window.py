@@ -2,13 +2,12 @@ from functools import partial
 from PyQt5.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QPushButton, QLabel, QAction, QMenu, QMessageBox, QInputDialog, QLineEdit
 from PyQt5.QtCore import QUrl, Qt
 from PyQt5.QtGui import QDesktopServices
-import sity_list  # Импортируем модуль для работы со списком закладок
-
+import sity_list
 class BookmarkMainWindow(QMainWindow):
     def __init__(self, bookmarks):
         super().__init__()
         self.setWindowTitle("Мой Портативный Браузер")
-        self.bookmarks = bookmarks  # Загружаем закладки из модуля sity_list
+        self.bookmarks = bookmarks
         self.initUI()
 
     def initUI(self):
@@ -32,7 +31,6 @@ class BookmarkMainWindow(QMainWindow):
 
         central_widget.setLayout(self.main_layout)
 
-        # Контекстное меню для удаления закладок
         central_widget.setContextMenuPolicy(Qt.CustomContextMenu)
         central_widget.customContextMenuRequested.connect(self.context_menu_event)
 
@@ -75,7 +73,7 @@ class BookmarkMainWindow(QMainWindow):
     def remove_bookmark(self, category, index):
         if category in self.bookmarks and index < len(self.bookmarks[category]):
             del self.bookmarks[category][index]
-            if not self.bookmarks[category]:  # Если категория пустая, удалите её
+            if not self.bookmarks[category]:
                 del self.bookmarks[category]
             sity_list.save_bookmarks(self.bookmarks)
             self.refresh_ui()
