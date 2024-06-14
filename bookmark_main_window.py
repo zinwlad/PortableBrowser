@@ -2,13 +2,13 @@ from functools import partial
 from PyQt5.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QPushButton, QLabel, QAction, QMenu, QMessageBox, QInputDialog, QLineEdit
 from PyQt5.QtCore import QUrl, Qt
 from PyQt5.QtGui import QDesktopServices
-from bookmark_manager import load_bookmarks, save_bookmarks
+import sity_list  # Импортируем модуль для работы со списком закладок
 
 class BookmarkMainWindow(QMainWindow):
-    def __init__(self):
+    def __init__(self, bookmarks):
         super().__init__()
         self.setWindowTitle("Мой Портативный Браузер")
-        self.bookmarks = load_bookmarks()
+        self.bookmarks = bookmarks  # Загружаем закладки из модуля sity_list
         self.initUI()
 
     def initUI(self):
@@ -77,7 +77,7 @@ class BookmarkMainWindow(QMainWindow):
             del self.bookmarks[category][index]
             if not self.bookmarks[category]:  # Если категория пустая, удалите её
                 del self.bookmarks[category]
-            self.save_bookmarks()  # Сохранить изменения
+            sity_list.save_bookmarks(self.bookmarks)  # Сохранить изменения в модуле sity_list
             self.refresh_ui()  # Обновить интерфейс после удаления закладки
 
     def refresh_ui(self):
@@ -107,7 +107,7 @@ class BookmarkMainWindow(QMainWindow):
                     if category not in self.bookmarks:
                         self.bookmarks[category] = []
                     self.bookmarks[category].append({"name": site_name, "url": site_url})
-                    self.save_bookmarks()  # Сохранить изменения
+                    sity_list.save_bookmarks(self.bookmarks)  # Сохранить изменения в модуле sity_list
                     self.refresh_ui()  # Обновить интерфейс после добавления закладки
 
     def filter_bookmarks(self, text):
