@@ -28,7 +28,7 @@ bookmarks = {
         {"name": "Гугл диск", "url": "https://drive.google.com/drive/my-drive"},
         {"name": "2gis", "url": "https://2gis.kz/astana"},
         {"name": "Программы", "url": "https://howdyho.net"},
-        {"name": "Временная почта", "url": "https://temp-mail.org/ru/"}
+        {"name": "Временная почта", "url": "https://temp-mail.org/ru/"},
         {"name": "Dropmefiles", "url": "https://dropmefiles.com"}
     ],
     "Скачивание клипартов": [

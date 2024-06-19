@@ -1,3 +1,4 @@
+#bookmark_main_window.py
 from functools import partial
 from PyQt5.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QPushButton, QLabel, QAction, QMenu, QMessageBox, QInputDialog, QLineEdit
 from PyQt5.QtCore import QUrl, Qt
@@ -27,7 +28,7 @@ class BookmarkMainWindow(QMainWindow):
 
     def setup_bookmarks(self, bookmarks, layout):
         for category, sites in bookmarks.items():
-            if sites:  # Добавлять только непустые категории
+            if sites:
                 self.add_category_to_layout(layout, category, sites)
 
     def add_category_to_layout(self, layout, category, sites):
@@ -69,16 +70,13 @@ class BookmarkMainWindow(QMainWindow):
 
     def refresh_ui(self):
         layout = self.centralWidget().layout()
-        # Удалить все виджеты из layout
         while layout.count():
             item = layout.takeAt(0)
             widget = item.widget()
             if widget is not None:
                 widget.deleteLater()
-        # Заново добавить виджеты
-        self.setup_bookmarks(self.bookmarks, layout)
 
-        # Повторно добавить строку поиска и кнопку добавления закладок
+        self.setup_bookmarks(self.bookmarks, layout)
         self.main_layout.addWidget(self.search_bar)
         add_button = QPushButton("Добавить закладку")
         add_button.clicked.connect(self.add_bookmark)
