@@ -1,9 +1,8 @@
-#bookmark_main_window.py
 from functools import partial
-from PyQt5.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QPushButton, QLabel, QAction, QMenu, QMessageBox, QInputDialog, QLineEdit
+from PyQt5.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QScrollArea
 from PyQt5.QtCore import QUrl, Qt
 from PyQt5.QtGui import QDesktopServices
-import sity_list
+
 class BookmarkMainWindow(QMainWindow):
     def __init__(self, bookmarks):
         super().__init__()
@@ -14,22 +13,43 @@ class BookmarkMainWindow(QMainWindow):
     def initUI(self):
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
-        self.main_layout = QVBoxLayout()
 
-        self.category_label = QLabel("Категории:")
-        self.main_layout.addWidget(self.category_label)
-        self.setup_bookmarks(self.bookmarks, self.main_layout)
+        main_layout = QVBoxLayout()
+        self.scroll_area = QScrollArea()
+        self.scroll_area.setWidgetResizable(True)
+        self.scroll_widget = QWidget()
+        self.scroll_layout = QHBoxLayout()
 
-        central_widget.setLayout(self.main_layout)
-        central_widget.setContextMenuPolicy(Qt.CustomContextMenu)
-        central_widget.customContextMenuRequested.connect(self.context_menu_event)
+        self.setup_bookmarks(self.bookmarks, self.scroll_layout)
+
+        self.scroll_widget.setLayout(self.scroll_layout)
+        self.scroll_area.setWidget(self.scroll_widget)
+        main_layout.addWidget(self.scroll_area)
+
+        central_widget.setLayout(main_layout)
+
+        # Устанавливаем фиксированный размер окна
+        self.adjust_window_size()
 
         self.show()
 
     def setup_bookmarks(self, bookmarks, layout):
-        for category, sites in bookmarks.items():
-            if sites:
-                self.add_category_to_layout(layout, category, sites)
+        categories = list(bookmarks.items())
+        half = len(categories) // 2
+
+        left_column = QVBoxLayout()
+        right_column = QVBoxLayout()
+
+        for i in range(half):
+            category, sites = categories[i]
+            self.add_category_to_layout(left_column, category, sites)
+
+        for i in range(half, len(categories)):
+            category, sites = categories[i]
+            self.add_category_to_layout(right_column, category, sites)
+
+        layout.addLayout(left_column)
+        layout.addLayout(right_column)
 
     def add_category_to_layout(self, layout, category, sites):
         category_widget = QWidget()
@@ -48,60 +68,19 @@ class BookmarkMainWindow(QMainWindow):
     def open_website(self, site):
         url = QUrl(site['url'])
         if not QDesktopServices.openUrl(url):
-            QMessageBox.warning(self, "Ошибка", f"Не удалось открыть сайт: {site['name']}")
+            print(f"Не удалось открыть сайт: {site['name']}")
 
-    def context_menu_event(self, event):
-        context_menu = QMenu(self)
-        for category, sites in self.bookmarks.items():
-            for index, site in enumerate(sites):
-                action_title = f"Удалить {site['name']}"
-                action = QAction(action_title, context_menu)
-                action.triggered.connect(partial(self.remove_bookmark, category, index))
-                context_menu.addAction(action)
-        context_menu.exec_(event.globalPos())
+    def adjust_window_size(self):
+        width = 800
+        height = 600
 
-    def remove_bookmark(self, category, index):
-        if category in self.bookmarks and index < len(self.bookmarks[category]):
-            del self.bookmarks[category][index]
-            if not self.bookmarks[category]:
-                del self.bookmarks[category]
-            sity_list.save_bookmarks(self.bookmarks)
-            self.refresh_ui()
+        categories = list(self.bookmarks.items())
+        half = len(categories) // 2
 
-    def refresh_ui(self):
-        layout = self.centralWidget().layout()
-        while layout.count():
-            item = layout.takeAt(0)
-            widget = item.widget()
-            if widget is not None:
-                widget.deleteLater()
+        item_height = 100
+        total_height = max(half, len(categories) - half) * item_height
 
-        self.setup_bookmarks(self.bookmarks, layout)
-        self.main_layout.addWidget(self.search_bar)
-        add_button = QPushButton("Добавить закладку")
-        add_button.clicked.connect(self.add_bookmark)
-        self.main_layout.addWidget(add_button)
+        if total_height > height:
+            height = total_height
 
-    def add_bookmark(self):
-        category, ok = QInputDialog.getText(self, 'Новая категория', 'Введите имя категории:')
-        if ok and category:
-            site_name, ok = QInputDialog.getText(self, 'Новая закладка', 'Введите имя закладки:')
-            if ok and site_name:
-                site_url, ok = QInputDialog.getText(self, 'Новая закладка', 'Введите URL закладки:')
-                if ok and site_url:
-                    if category not in self.bookmarks:
-                        self.bookmarks[category] = []
-                    self.bookmarks[category].append({"name": site_name, "url": site_url})
-                    sity_list.save_bookmarks(self.bookmarks)
-                    self.refresh_ui()
-
-    def filter_bookmarks(self, text):
-        layout = self.centralWidget().layout()
-        for i in range(layout.count()):
-            widget = layout.itemAt(i).widget()
-            if isinstance(widget, QWidget):
-                category_label = widget.layout().itemAt(0).widget()
-                if text.lower() in category_label.text().lower():
-                    widget.show()
-                else:
-                    widget.hide()
+        self.setFixedSize(width, height)
