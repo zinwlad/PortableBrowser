@@ -1,4 +1,3 @@
-from functools import partial
 from PyQt5.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QScrollArea
 from PyQt5.QtCore import QUrl, Qt
 from PyQt5.QtGui import QDesktopServices
@@ -25,12 +24,9 @@ class BookmarkMainWindow(QMainWindow):
         self.scroll_widget.setLayout(self.scroll_layout)
         self.scroll_area.setWidget(self.scroll_widget)
         main_layout.addWidget(self.scroll_area)
-
         central_widget.setLayout(main_layout)
 
-        # Устанавливаем фиксированный размер окна
         self.adjust_window_size()
-
         self.show()
 
     def setup_bookmarks(self, bookmarks, layout):
@@ -62,8 +58,11 @@ class BookmarkMainWindow(QMainWindow):
 
     def add_site_to_layout(self, layout, site):
         site_button = QPushButton(site["name"])
-        site_button.clicked.connect(partial(self.open_website, site))
+        site_button.clicked.connect(lambda _, s=site: self.open_website(s))
         layout.addWidget(site_button)
+
+        # Установка фиксированной ширины кнопки
+        site_button.setFixedWidth(150)
 
     def open_website(self, site):
         url = QUrl(site['url'])
@@ -71,13 +70,13 @@ class BookmarkMainWindow(QMainWindow):
             print(f"Не удалось открыть сайт: {site['name']}")
 
     def adjust_window_size(self):
-        width = 800
-        height = 600
+        width = 450
+        height = 650
 
         categories = list(self.bookmarks.items())
         half = len(categories) // 2
 
-        item_height = 100
+        item_height = 50
         total_height = max(half, len(categories) - half) * item_height
 
         if total_height > height:
