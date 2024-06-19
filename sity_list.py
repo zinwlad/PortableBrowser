@@ -6,8 +6,13 @@ bookmarks = {
     ],
     "Учеба": [
         {"name": "Skillbox", "url": "https://go.skillbox.ru/education/my"},
+        {"name": "Github", "url": "https://github.com"},
         {"name": "Stepik", "url": "https://stepik.org/catalog"},
-        {"name": "Instagram", "url": "https://www.instagram.com"}
+    ],
+    "Почта": [
+        {"name": "Gmail", "url": "https://mail.google.com/mail/u/0/#inbox"},
+        {"name": "Mail", "url": "https://e.mail.ru/inbox/"},
+        {"name": "Rambler", "url": "https://www.rambler.ru"},
     ],
     "Фильмы": [
         {"name": "Seasonvar", "url": "http://seasonvar.ru"},
@@ -21,6 +26,3 @@ bookmarks = {
     ]
 }
 
-def save_bookmarks(bookmarks_data):
-    global bookmarks
-    bookmarks = bookmarks_data  # Обновляем данные в модуле sity_list

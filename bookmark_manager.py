@@ -18,6 +18,3 @@ bookmarks = load_bookmarks()
 
 
 
-def save_bookmarks(bookmarks):
-    with open('bookmarks.json', 'w') as file:
-        json.dump(bookmarks, file, indent=4, ensure_ascii=False)

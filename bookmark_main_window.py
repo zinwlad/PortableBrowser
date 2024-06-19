@@ -17,20 +17,9 @@ class BookmarkMainWindow(QMainWindow):
 
         self.category_label = QLabel("Категории:")
         self.main_layout.addWidget(self.category_label)
-
         self.setup_bookmarks(self.bookmarks, self.main_layout)
 
-        self.search_bar = QLineEdit(self)
-        self.search_bar.setPlaceholderText("Поиск...")
-        self.search_bar.textChanged.connect(self.filter_bookmarks)
-        self.main_layout.addWidget(self.search_bar)
-
-        add_button = QPushButton("Добавить закладку")
-        add_button.clicked.connect(self.add_bookmark)
-        self.main_layout.addWidget(add_button)
-
         central_widget.setLayout(self.main_layout)
-
         central_widget.setContextMenuPolicy(Qt.CustomContextMenu)
         central_widget.customContextMenuRequested.connect(self.context_menu_event)
 
