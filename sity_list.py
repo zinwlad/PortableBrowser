@@ -23,6 +23,19 @@ bookmarks = {
         {"name": "Deepl", "url": "https://www.deepl.com/ru/translator"},
         {"name": "Google", "url": "https://translate.google.kz/?sl=auto&tl=ru&op=translate"},
         {"name": "Yandex", "url": "https://translate.yandex.com/kk/?lang=ru-en&text=небо"}
+    ],
+    "Полезное": [
+        {"name": "Гугл диск", "url": "https://drive.google.com/drive/my-drive"},
+        {"name": "2gis", "url": "https://2gis.kz/astana"},
+        {"name": "Программы", "url": "https://howdyho.net"},
+        {"name": "Временная почта", "url": "https://temp-mail.org/ru/"}
+        {"name": "Dropmefiles", "url": "https://dropmefiles.com"}
+    ],
+    "Скачивание клипартов": [
+        {"name": "Freepik", "url": "https://ru.freepik.com"},
+        {"name": "Vecteezy", "url": "https://www.vecteezy.com"},
+        {"name": "All-free-download", "url": "https://all-free-download.com/free-vectors/"},
+        {"name": "Svgrepo", "url": "https://www.svgrepo.com"}
     ]
 }
 
