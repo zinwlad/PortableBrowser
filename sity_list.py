@@ -2,18 +2,26 @@ bookmarks = {
     "ИИ": [
         {"name": "ChatGPT", "url": "https://chatgpt.com"},
         {"name": "gemini", "url": "https://gemini.google.com/app"},
+        {"name": "Алиса", "url": "https://a.ya.ru"},
         {"name": "Bing", "url": "https://www.bing.com"}
     ],
     "Учеба": [
         {"name": "Skillbox", "url": "https://go.skillbox.ru/education/my"},
         {"name": "Github", "url": "https://github.com"},
         {"name": "Stepik", "url": "https://stepik.org/catalog"},
+        {"name": "Gitlab", "url": "https://gitlab.com"}
     ],
     "Почта": [
         {"name": "Gmail", "url": "https://mail.google.com/mail/u/0/#inbox"},
         {"name": "Mail", "url": "https://e.mail.ru/inbox/"},
         {"name": "Rambler", "url": "https://www.rambler.ru"},
         {"name": "Yandex", "url": "mail.yandex.kz"}
+    ],
+    "Развлечение": [
+        {"name": "YouTube", "url": "https://www.youtube.com/"},
+        {"name": "ВКонтакте", "url": "https://vk.com/feed"},
+        {"name": "Лайфхакер", "url": "https://lifehacker.ru"},
+        {"name": "ФишкиНЕТ", "url": "https://fishki.net"}
     ],
     "Полезное": [
         {"name": "Гугл диск", "url": "https://drive.google.com/drive/my-drive"},
