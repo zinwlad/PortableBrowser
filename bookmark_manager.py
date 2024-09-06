@@ -1,4 +1,3 @@
-#bookmark_manager.py
 import sys
 import json
 import os
@@ -10,11 +9,14 @@ def load_bookmarks():
         bookmarks_path = 'bookmarks.json'
     try:
         with open(bookmarks_path, 'r', encoding='utf-8') as file:
-            return json.load(file)
+            data = json.load(file)
+            print("Loaded bookmarks:", data)  # Для отладки
+            return data
     except FileNotFoundError:
+        print("Bookmarks file not found. Returning empty dictionary.")
+        return {}
+    except json.JSONDecodeError as e:
+        print(f"Error decoding JSON: {e}")
         return {}
 
 bookmarks = load_bookmarks()
-
-
-
