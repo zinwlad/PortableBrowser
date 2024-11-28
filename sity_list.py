@@ -1,6 +1,19 @@
-#sity_list.py
+"""
+Module for managing bookmarks organized by categories.
 
-from typing import List, Dict, NamedTuple
+This module provides functionality to store and manage bookmarks with their URLs and icons,
+organized into different categories. It supports operations like adding, removing,
+and retrieving bookmarks.
+
+Example:
+    >>> get_all_categories()
+    ['ИИ', 'Учеба', 'Почта', ...]
+    >>> get_bookmarks_for_category('ИИ')
+    [Bookmark(name='ChatGPT', url='https://chat.openai.com', icon='icons/chatgpt.png'), ...]
+"""
+
+from typing import List, Dict, NamedTuple, Optional
+from urllib.parse import urlparse
 
 class Bookmark(NamedTuple):
     name: str
@@ -58,6 +71,22 @@ bookmarks: Dict[str, List[Bookmark]] = {
     ]
 }
 
+def validate_url(url: str) -> bool:
+    """
+    Validate if the given string is a proper URL.
+    
+    Args:
+        url: String to validate
+        
+    Returns:
+        bool: True if URL is valid, False otherwise
+    """
+    try:
+        result = urlparse(url)
+        return all([result.scheme, result.netloc])
+    except:
+        return False
+
 def get_all_categories() -> List[str]:
     """Return a list of all bookmark categories."""
     return list(bookmarks.keys())
@@ -66,8 +95,70 @@ def get_bookmarks_for_category(category: str) -> List[Bookmark]:
     """Return all bookmarks for a given category."""
     return bookmarks.get(category, [])
 
+def search_bookmarks(query: str) -> List[tuple[str, Bookmark]]:
+    """
+    Search for bookmarks across all categories by name.
+    
+    Args:
+        query: Search string to match against bookmark names
+        
+    Returns:
+        List of tuples containing category and matching bookmarks
+    """
+    results = []
+    for category, category_bookmarks in bookmarks.items():
+        for bookmark in category_bookmarks:
+            if query.lower() in bookmark.name.lower():
+                results.append((category, bookmark))
+    return results
+
+def update_bookmark(category: str, old_name: str, new_name: str = None, 
+                   new_url: str = None, new_icon: str = None) -> bool:
+    """
+    Update an existing bookmark's properties.
+    
+    Args:
+        category: Category containing the bookmark
+        old_name: Current name of the bookmark to update
+        new_name: New name for the bookmark (optional)
+        new_url: New URL for the bookmark (optional)
+        new_icon: New icon path for the bookmark (optional)
+        
+    Returns:
+        bool: True if bookmark was updated, False if not found
+    """
+    if category not in bookmarks:
+        return False
+        
+    for i, bookmark in enumerate(bookmarks[category]):
+        if bookmark.name == old_name:
+            name = new_name or bookmark.name
+            url = new_url or bookmark.url
+            icon = new_icon or bookmark.icon
+            
+            if new_url and not validate_url(new_url):
+                raise ValueError("Invalid URL provided")
+                
+            bookmarks[category][i] = Bookmark(name=name, url=url, icon=icon)
+            return True
+    return False
+
 def add_bookmark(category: str, name: str, url: str, icon: str = "") -> None:
-    """Add a new bookmark to a category."""
+    """
+    Add a new bookmark to a category.
+    
+    Args:
+        category: Category to add the bookmark to
+        name: Name of the bookmark
+        url: URL of the bookmark
+        icon: Path to the bookmark's icon (optional)
+        
+    Raises:
+        ValueError: If the URL is invalid
+    """
+    if not validate_url(url):
+        raise ValueError("Invalid URL provided")
+        
     if category not in bookmarks:
         bookmarks[category] = []
     bookmarks[category].append(Bookmark(name=name, url=url, icon=icon))

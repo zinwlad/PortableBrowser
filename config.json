@@ -1,0 +1,10 @@
+{
+    "window_width": 450,
+    "window_height": 650,
+    "min_width": 300,
+    "min_height": 400,
+    "max_width": 800,
+    "max_height": 1200,
+    "button_width": 150,
+    "minimize_to_tray": true
+}

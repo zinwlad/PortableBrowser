@@ -1,49 +1,97 @@
 # Portable Browser Bookmarks Manager
 
-This is a simple, portable browser bookmarks manager built using PyQt5. The application allows you to manage and organize your bookmarks into different categories, providing an easy-to-use interface for quick access to your favorite websites.
+Удобный портативный менеджер закладок, построенный на PyQt5. Приложение позволяет управлять и организовывать закладки по категориям, предоставляя интуитивно понятный интерфейс для быстрого доступа к вашим любимым сайтам.
 
-## Features
+## Основные функции
 
-- **Add Bookmarks:** Add new bookmarks to different categories.
-- **Delete Bookmarks:** Delete bookmarks through a context menu.
-- **Search Bar:** Quickly search for bookmarks by category name.
-- **Open Websites:** Click on bookmark buttons to open websites in your default browser.
+- **Управление закладками:**
+  - Добавление новых закладок в разные категории
+  - Удаление закладок через контекстное меню
+  - Открытие сайтов в текущем или новом окне браузера
+  
+- **Умный поиск:**
+  - Мгновенный поиск по названиям закладок
+  - Автоматическая фильтрация категорий при поиске
+  - Быстрый доступ к поиску через Ctrl+F
 
-## Installation
+- **Гибкий интерфейс:**
+  - Сворачиваемые категории для экономии места
+  - Система уведомлений об ошибках
+  - Поддержка иконок для закладок
+  - Сворачивание в системный трей
 
-1. **Clone the repository:**
+- **Настройка через конфигурацию:**
+  - Настраиваемые размеры окна и кнопок
+  - Возможность отключения сворачивания в трей
+  - Гибкая настройка через config.json
 
-    ```bash
-    git clone https://github.com/your-username/portable-browser-bookmarks-manager.git
-    cd portable-browser-bookmarks-manager
-    ```
+## Установка
 
-2. **Install the required dependencies:**
+1. **Клонируйте репозиторий:**
+   ```bash
+   git clone https://github.com/your-username/portable-browser-bookmarks-manager.git
+   cd portable-browser-bookmarks-manager
+   ```
 
-    Make sure you have Python 3 installed. Then install the required packages using pip:
+2. **Установите зависимости:**
+   ```bash
+   pip install PyQt5
+   ```
 
-    ```bash
-    pip install PyQt5
-    ```
+## Использование
 
-## Usage
+1. **Запуск приложения:**
+   ```bash
+   python main.py
+   ```
 
-1. **Run the application:**
+2. **Горячие клавиши:**
+   - `Ctrl+F` - фокус на поиске
+   - `Esc` - свернуть окно в трей (если включено)
 
-    ```bash
-    python main.py
-    ```
+3. **Управление закладками:**
+   - Левый клик - открыть сайт
+   - Правый клик - контекстное меню с дополнительными действиями
+   - Кнопка ▼/▶ - свернуть/развернуть категорию
 
-2. **Manage your bookmarks:**
+## Структура проекта
 
-    - **Add Bookmark:** Click on "Add Bookmark" button to add a new bookmark. Enter the category name, bookmark name, and URL.
-    - **Delete Bookmark:** Right-click on a bookmark to delete it.
-    - **Search:** Use the search bar to filter bookmarks by category.
+- `main.py` - точка входа приложения, инициализация и обработка ошибок
+- `bookmark_main_window.py` - основной класс окна и управление интерфейсом
+- `sity_list.py` - хранение и управление закладками
+- `config.json` - файл конфигурации с настройками приложения
+- `browser.log` - лог-файл для отслеживания ошибок
 
-## File Structure
+## Конфигурация
 
-- `main.py`: Entry point of the application. Initializes the main window.
-- `bookmark_main_window.py`: Contains the main window class `BookmarkMainWindow` which manages the UI and bookmark operations.
-- `sity_list.py`: Contains the bookmark data and functions to load and save bookmarks.
+Файл `config.json` позволяет настроить:
+```json
+{
+    "window_width": 450,
+    "window_height": 650,
+    "min_width": 300,
+    "min_height": 400,
+    "max_width": 800,
+    "max_height": 1200,
+    "button_width": 150,
+    "minimize_to_tray": true
+}
+```
 
+## Логирование
 
+Приложение ведет подробный лог в файле `browser.log`, который помогает отслеживать:
+- Успешные операции с закладками
+- Ошибки при открытии сайтов
+- Проблемы с загрузкой иконок
+- Другие важные события
+
+## Требования
+
+- Python 3.6+
+- PyQt5
+- Доступ к интернету для открытия закладок
+
+## Лицензия
+
+Этот проект распространяется под лицензией MIT. Подробности в файле LICENSE.

@@ -1,0 +1,51 @@
+{
+    "ИИ": [
+        Bookmark(name="ChatGPT", url="https://chat.openai.com", icon="icons/chatgpt.png"),
+        Bookmark(name="Google Gemini", url="https://gemini.google.com/app", icon="icons/gemini.png"),
+        Bookmark(name="Яндекс Алиса", url="https://yandex.ru/alice", icon="icons/alice.png"),
+        Bookmark(name="Bing AI", url="https://www.bing.com/new", icon="icons/bing.png")
+    ],
+    "Учеба": [
+        Bookmark(name="Skillbox", url="https://skillbox.ru", icon="icons/skillbox.png"),
+        Bookmark(name="GitHub", url="https://github.com", icon="icons/github.png"),
+        Bookmark(name="Stepik", url="https://stepik.org", icon="icons/stepik.png"),
+        Bookmark(name="GitLab", url="https://gitlab.com", icon="icons/gitlab.png")
+    ],
+    "Почта": [
+        {"name": "Gmail", "url": "https://mail.google.com", "icon": "icons/gmail.png"},
+        {"name": "Mail.ru", "url": "https://mail.ru", "icon": "icons/mailru.png"},
+        {"name": "Rambler", "url": "https://mail.rambler.ru", "icon": "icons/rambler.png"},
+        {"name": "Яндекс.Почта", "url": "https://mail.yandex.ru", "icon": "icons/yandex.png"}
+    ],
+    "Развлечение": [
+        {"name": "YouTube", "url": "https://www.youtube.com", "icon": "icons/youtube.png"},
+        {"name": "ВКонтакте", "url": "https://vk.com", "icon": "icons/vk.png"},
+        {"name": "Лайфхакер", "url": "https://lifehacker.ru", "icon": "icons/lifehacker.png"},
+        {"name": "Fishki.net", "url": "https://fishki.net", "icon": "icons/fishki.png"}
+    ],
+    "Полезное": [
+        {"name": "Google Диск", "url": "https://drive.google.com", "icon": "icons/gdrive.png"},
+        {"name": "2ГИС", "url": "https://2gis.ru", "icon": "icons/2gis.png"},
+        {"name": "Программы", "url": "https://howdyho.net", "icon": "icons/howdyho.png"},
+        {"name": "Temp-Mail", "url": "https://temp-mail.org", "icon": "icons/tempmail.png"},
+        {"name": "DropMeFiles", "url": "https://dropmefiles.com", "icon": "icons/dropmefiles.png"}
+    ],
+    "Фильмы и новости": [
+        {"name": "Seasonvar", "url": "http://seasonvar.ru", "icon": "icons/seasonvar.png"},
+        {"name": "Kinobar", "url": "https://kinobar.vip", "icon": "icons/kinobar.png"},
+        {"name": "Reuters", "url": "https://www.reuters.com", "icon": "icons/reuters.png"}
+    ],
+    "Переводчики": [
+        {"name": "DeepL", "url": "https://www.deepl.com/translator", "icon": "icons/deepl.png"},
+        {"name": "Google Переводчик", "url": "https://translate.google.com", "icon": "icons/gtranslate.png"},
+        {"name": "Яндекс.Переводчик", "url": "https://translate.yandex.ru", "icon": "icons/ytranslate.png"}
+    ],
+    "Клипарты": [
+        {"name": "Freepik", "url": "https://www.freepik.com", "icon": "icons/freepik.png"},
+        {"name": "Vecteezy", "url": "https://www.vecteezy.com", "icon": "icons/vecteezy.png"},
+        {"name": "All-free-download", "url": "https://all-free-download.com/free-vectors",
+         "icon": "icons/allfreedownload.png"},
+        {"name": "SVG Repo", "url": "https://www.svgrepo.com", "icon": "icons/svgrepo.png"}
+    ]
+
+}
